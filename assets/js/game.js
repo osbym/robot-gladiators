@@ -1,3 +1,9 @@
+// Game States
+// "WIN" - Player robot has defeated all enemy-robots
+//  * Fight all enemy-robots
+//  * Defeat each enemy-robot
+// "LOSE" - Player robot's health is zero or less
+
 var playerName =window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -65,7 +71,10 @@ var fight = function() {
     window.alert("You need to pick a valid option. Try again!");
     }
 };
+// run fight function to start game
+    //fight();
+var enemy1= "Roborto";
+var enemy2= "Amy Android";
+var enemy3= "Robo Trumble";
 
-    // run fight function to start game
-    fight();
 
