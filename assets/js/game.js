@@ -5,12 +5,30 @@ var randomNumber = function(min, max) {
     return value;
 };
 
-    var fight = function(enemy) {
+    var fightOrSkip= function() {
         //repeat and execute as long as the enemy-robot is alive
-    while (playerInfo.health > 0 && enemy.health > 0) {
+        // ask player if they'd like to fight or skip using fightOrSkip function
         // place fight function code block here. . .
         var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
             
+        // Enter the conditional recursive function call here!
+        promptFight = promptFight.toLowerCase();
+        if (promptFight === "" || promptFight === null) {
+            window.alert("You need to provide a valid answer! Please try again.")
+            return fightOrSkip();
+        }
+
+        // repeat and execute as long as the enemy-robot is alive
+        while (playerInfo.health > 0 && enemy.health > 0) {
+            // ask player if they'd like to fight or skip using fightOrSkip function
+            if (fightOrSkip()) {
+                // if true, leave fight by breaking loop
+                break;
+            }
+            fightOrSkip(); // <-- Replace code with this function call
+            var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+        }
+
     //if player picks "skip" confirm and then stop the loop
     if (promptFight === "skip" || promptFight === "SKIP") {
         // confirm player wants to skip
@@ -21,8 +39,10 @@ var randomNumber = function(min, max) {
         window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
         // subtract money from playerMoney for skipping
         playerInfo.money = Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money", playerInfo.money)
-    break;
+
+        // return true if player wants to leave
+        return true;
+        }
     }
 }
 
@@ -44,6 +64,7 @@ if (enemy.health <= 0) {
     
     // leave while() loop since enemy is dead
     break;
+    
 } else {
     window.alert(enemy.name + " still has " + enemy.health + " health left.");
 }
